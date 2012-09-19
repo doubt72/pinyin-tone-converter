@@ -5,4 +5,11 @@ This repository will contain a ruby class thingy (PinyinToneConverter) that conv
 
 Also, tests to make sure it works.  Because everybody likes well-tested code.
 
-The class should support any of the various standard forms of ü in input; ü or u: or v.
+# Notes on Special Characters
+
+The class should support any of the various standard forms of ü for input (ü or u: or v) and produce double-diacritic forms of those characters for tones (ǖ, ǘ, ǚ, ǜ).
+
+License
+=======
+
+Probably the Apache2 License.  I'll get around to setting that up properly at some point here.
