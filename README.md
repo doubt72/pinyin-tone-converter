@@ -1,8 +1,10 @@
 # Pinyin Tone Converter
 
-This repository contains a ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the UTF-8 equivalent with tone diacritical marks (like "zhōngwén") and back.
+This repository contains a simple ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the UTF-8 equivalent with tone diacritical marks (like "zhōngwén") and back.
 
 ## Usage
+
+[TODO: Docs on wrapper script]
 
 [TODO: Docs on class methods go here]
 
@@ -18,7 +20,7 @@ Also, tests to make sure it works.  Because everybody likes well-tested code.
 
 ## License
 
-Copyright 2012 Douglas Triggs (douglas@triggs.org).  All Rights Reserved.
+Copyright 2012 Douglas Triggs (douglas@triggs.org), All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
