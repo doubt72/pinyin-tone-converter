@@ -6,11 +6,15 @@ This repository contains a simple ruby class (PinyinToneConverter) that converts
 
 [TODO: Docs on wrapper script]
 
-[TODO: Docs on class methods go here]
+### Class Methods
+
+> number_to_utf8(string)
+
+> utf8_to_number(string)
 
 ### Notes
 
-* The class should support any of the various standard forms of ü for input (ü or u: or v) and produce double-diacritic forms of those characters for tones (ǖ, ǘ, ǚ, ǜ).
+* The class should support any of the various standard forms of ü for input ('ü' or 'u:' or 'v') and produce double-diacritic forms of those characters for tones (ǖ, ǘ, ǚ, ǜ).
 
 ## Tests
 
