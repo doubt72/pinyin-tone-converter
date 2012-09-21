@@ -14,14 +14,58 @@
 # permissions and limitations under the License.
 
 class PinyinToneConverter
-  def self.number_to_utf8(string)
+  @@conversion_list =
+    [['a', 'e', 'i', 'o', 'u', 'ü'],
+     ['ā', 'ē', 'ī', 'ō', 'ū', 'ǖ'],
+     ['á', 'é', 'í', 'ó', 'ú', 'ǘ'],
+     ['ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ'],
+     ['à', 'è', 'ì', 'ò', 'ù', 'ǜ']]
+  @@preferred_characters = ['a', 'e', 'o', 'u']
+
+  def self.number_to_utf8( string )
     # Convert a numbered pinyin string (e.g., "zhong1 wen2") to UTF-8
     # equivalent with diacriticals ("zhōngwén").
 
-    # TODO: actually do it
+    string = string.downcase
+    syllable = ""
+    utf8 = ""
+    string.each_char do |char|
+      if ( char >= 'a' && char <= 'z' )
+        syllable += char
+      elsif ( char == ':' )
+        if ( syllable[-1] == 'u' )
+          syllable[-1] = 'ü'
+        end
+      elsif ( char >= '1' && char <= '4' )
+        tone = char.to_i
+        # Tone marker should go on first vowel that's not i or ü;
+        # only use i or ü when that's the only vowel available
+        mark = nil
+        0.upto( syllable.length - 1 ) do |index|
+          if ( @@preferred_characters.include?( syllable[index] ) )
+            mark = index
+            break
+          elsif ( @@conversion_list[0].include?( syllable[index] ) )
+            mark = index
+          end
+        end
+        if (mark)
+          index = @@conversion_list[0].index( syllable[mark] )
+          syllable[mark] = @@conversion_list[tone][index]
+        end
+        utf8 += syllable
+        syllable = ""
+      else
+        # All other chars -- spaces, anything -- break syllables, but
+        # otherwise ignored
+        utf8 += syllable
+        syllable = ""
+      end
+    end
+    utf8 += syllable
   end
 
-  def self.utf8_to_number(string)
+  def self.utf8_to_number( string )
     # Convert a UTF-8 pinyin string with tone diacriticals (e.g.,
     # "zhōngwén") to an ASCII numbered pinyin string equivalent
     # ("zhong1 wen2")
