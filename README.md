@@ -8,13 +8,9 @@ This repository contains a simple ruby class (PinyinToneConverter) that converts
 
 ### Class Methods
 
-<number_to_utf8(string)>
+* number_to_utf8(string): Converts pinyin numbered tones ("zhong1 wen2") to UTF-8 equivalent with diacritical marks ("zhōngwén").
 
-Converts pinyin numbered tones ("zhong1 wen2") to UTF-8 equivalent with diacritical marks ("zhōngwén").
-
-<utf8_to_number(string)>
-
-Converts pinyin marked with UTF-8 diacritical tone markers ("zhōngwén") to ASCII numbered tone equivalents ("zhong1 wen2").
+* utf8_to_number(string): Converts pinyin marked with UTF-8 diacritical tone markers ("zhōngwén") to ASCII numbered tone equivalents ("zhong1 wen2").
 
 ### Notes
 
