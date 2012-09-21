@@ -30,7 +30,9 @@ class PinyinToneConverter
     syllable = ""
     utf8 = ""
     string.each_char do |char|
-      if ( char >= 'a' && char <= 'z' )
+      if ( char == 'v' )
+        syllable += 'ü'
+      elsif ( char >= 'a' && char <= 'z' )
         syllable += char
       elsif ( char == ':' )
         if ( syllable[-1] == 'u' )
