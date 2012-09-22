@@ -19,11 +19,11 @@ class PinyinToneConverter
                        ['á', 'é', 'í', 'ó', 'ú', 'ǘ'],
                        ['ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ'],
                        ['à', 'è', 'ì', 'ò', 'ù', 'ǜ']]
-  @@preferred_characters = ['a', 'e', 'o', 'u']
-  @@vowels = ['ā', 'ē', 'ī', 'ō', 'ū', 'ǖ',
-              'á', 'é', 'í', 'ó', 'ú', 'ǘ',
-              'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ',
-              'à', 'è', 'ì', 'ò', 'ù', 'ǜ']
+  @@preferred_vowels = ['a', 'e', 'o', 'u']
+  @@all_vowels = ['ā', 'ē', 'ī', 'ō', 'ū', 'ǖ',
+                  'á', 'é', 'í', 'ó', 'ú', 'ǘ',
+                  'ǎ', 'ě', 'ǐ', 'ǒ', 'ǔ', 'ǚ',
+                  'à', 'è', 'ì', 'ò', 'ù', 'ǜ']
 
 
   def self.number_to_utf8( string )
@@ -50,7 +50,7 @@ class PinyinToneConverter
         # only use i or ü when that's the only vowel available
         mark = nil
         0.upto( syllable.length - 1 ) do |index|
-          if ( @@preferred_characters.include?( syllable[index] ) )
+          if ( @@preferred_vowels.include?( syllable[index] ) )
             mark = index
             break
           elsif ( @@conversion_list[0].include?( syllable[index] ) )
@@ -95,7 +95,7 @@ class PinyinToneConverter
         syllable += char
       elsif (char == 'ü')
         syllable += 'v'
-      elsif ( @@vowels.include?(char) )
+      elsif ( @@all_vowels.include?(char) )
         1.upto(4) do |x|
           if ( @@conversion_list[x].include?(char) )
             index = @@conversion_list[x].index(char)

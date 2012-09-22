@@ -34,6 +34,9 @@ describe 'pinyin_tone_converter tests' do
       basic_test("wang3 xing4", "wǎng xìng")
       basic_test("zhong1 wen2 wang3 xing4", "zhōng wén wǎng xìng")
 
+      # Handling 'er'
+      basic_test("er1 er2 er3 er4", "ēr ér ěr èr")
+
       # Handling repositioning for 'i'
       basic_test("liang1 bai2", "liāng bái")
 
@@ -85,6 +88,9 @@ describe 'pinyin_tone_converter tests' do
       basic_test("zhōng wén", "zhong1 wen2")
       basic_test("wǎng xìng", "wang3 xing4")
       basic_test("zhōng wén wǎng xìng", "zhong1 wen2 wang3 xing4")
+
+      # Handling 'er'
+      basic_test("ēr ér ěr èr", "er1 er2 er3 er4")
 
       # When tone is on "wrong" syllable
       basic_test("lìang baì", "liang4 bai4")
