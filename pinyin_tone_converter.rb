@@ -101,7 +101,11 @@ class PinyinToneConverter
           end
         end
       else
-        pinyin += syllable + tone.to_s
+        pinyin += syllable
+        if (tone > 0)
+          pinyin += tone.to_s
+          tone = 0
+        end
         if (syllable.length > 0)
           pinyin += " "
         end
@@ -109,5 +113,9 @@ class PinyinToneConverter
       end
     end
     pinyin += syllable
+    if (tone > 0)
+      pinyin += tone.to_s
+      tone = 0
+    end
   end
 end
