@@ -1,6 +1,6 @@
 # Pinyin Tone Converter
 
-This repository contains a simple ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the UTF-8 equivalent with tone diacritical marks (like "zhōngwén") and back.
+This repository contains a simple ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the pinyin UTF-8 equivalent with tone diacritical marks (like "zhōng wén") and back.
 
 ## Usage
 
@@ -9,14 +9,18 @@ This repository contains a simple ruby class (PinyinToneConverter) that converts
 ### Class Methods
 
         number_to_utf8(string)
-Converts pinyin numbered tones ("zhong1 wen2") to UTF-8 equivalent with diacritical marks ("zhōngwén").
+Convert pinyin numbered tones ("zhong1 wen2") to pinyin UTF-8 equivalent with diacritical marks ("zhōng wén").
 
         utf8_to_number(string)
-Converts pinyin marked with UTF-8 diacritical tone markers ("zhōngwén") to ASCII numbered tone equivalents ("zhong1 wen2").
+Convert pinyin marked with UTF-8 diacritical tone markers ("zhōng wén") to ASCII numbered tone equivalents ("zhong1 wen2").
 
 ### Notes
 
-* The class should support any of the various standard forms of ü for input (ü or u: or v) and produce double-diacritic forms of those characters for tones (ǖ, ǘ, ǚ, ǜ).
+* Any of the various standard forms of ü are supported for input (ü or u: or v) and produce double-diacritic forms of the characters for tones (ǖ, ǘ, ǚ, ǜ).  ASCII output will produce the 'v' character, so as to avoid all UTF-8 diacriticals in output.
+
+* Whenever possible, putting diactrical marks on i or ü will be avoided; generally the mark will be added to the first vowel that is not i or ü, but it will fall back to marking those vowels if they're the only vowel available.
+
+* Syllables must be separated by some non-alphabetic character; this can be anything (but would typically be spaces), including the numeric tone markers themselves.
 
 ## Tests
 
