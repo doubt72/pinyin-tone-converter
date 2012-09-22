@@ -4,8 +4,6 @@ This repository contains a simple ruby class (PinyinToneConverter) that converts
 
 ## Usage
 
-[TODO: Docs on wrapper script]
-
 ### Class Methods
 
         number_to_utf8(string)
@@ -13,6 +11,14 @@ Convert pinyin numbered tones ("zhong1 wen2") to UTF-8 equivalent with diacritic
 
         utf8_to_number(string)
 Convert pinyin marked with UTF-8 diacritical tone markers ("zhōng wén") to ASCII numbered tone equivalents ("zhong1 wen2").
+
+### CSV Conversion Script
+
+Included is a fairly rudimentary script for converting a field in a CSV file:
+
+        ruby convert_csv.rb <filename> <column>
+
+Where filename is the input filename (the output filename will have ".out" appended to the end) and column is the column number (counting from zero, of course).
 
 ### Notes
 
@@ -24,11 +30,13 @@ Convert pinyin marked with UTF-8 diacritical tone markers ("zhōng wén") to ASC
 
 ## Tests
 
-This repository includes tests to make sure it works (because everybody likes well-tested code).  Tests can be run by simply running the rspec command:
+This repository includes tests to make sure it works (because everybody likes well-tested code).  Tests can be run by simply running the rspec command in the main repository directory:
 
         rspec
 
-Easy peasy.  (Obviously, the rspec is required to run the tests, so the rspec gem should be installed.)
+Easy peasy.  Only 963 tests at last count -- obviously the test suite still needs some beefing up.
+
+(Obviously, the rspec is required to run the tests, so the rspec gem should be installed.)
 
 ## License
 
