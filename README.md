@@ -24,9 +24,11 @@ Convert pinyin marked with UTF-8 diacritical tone markers ("zhōng wén") to ASC
 
 ## Tests
 
-Also, tests to make sure it works.  Because everybody likes well-tested code.
+This repository includes tests to make sure it works (because everybody likes well-tested code).  Tests can be run by simply running the rspec command:
 
-[TODO: Docs on running tests go here]
+        rspec
+
+Easy peasy.  (Obviously, the rspec is required to run the tests, so the rspec gem should be installed.)
 
 ## License
 

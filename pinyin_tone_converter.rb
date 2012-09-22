@@ -38,7 +38,7 @@ class PinyinToneConverter
     string.each_char do |char|
       if ( char == 'v' )
         syllable += 'ü'
-      elsif ( char >= 'a' && char <= 'z' )
+      elsif ( (char >= 'a' && char <= 'z') || char == 'ü')
         syllable += char
       elsif ( char == ':' )
         if ( syllable[-1] == 'u' )
@@ -77,6 +77,7 @@ class PinyinToneConverter
       end
     end
     utf8 += syllable
+    utf8.rstrip
   end
 
   def self.utf8_to_number( string )
@@ -90,13 +91,19 @@ class PinyinToneConverter
     pinyin = ""
     tone = 0
     string.each_char do |char|
-      if ( ( char >= 'a' && char <= 'z' ) )
+      if ( char >= 'a' && char <= 'z' )
         syllable += char
+      elsif (char == 'ü')
+        syllable += 'v'
       elsif ( @@vowels.include?(char) )
         1.upto(4) do |x|
           if ( @@conversion_list[x].include?(char) )
             index = @@conversion_list[x].index(char)
-            syllable += @@conversion_list[0][index]
+            new = @@conversion_list[0][index]
+            if (new == 'ü')
+              new = 'v'
+            end
+            syllable += new
             tone = x
           end
         end
@@ -117,5 +124,6 @@ class PinyinToneConverter
       pinyin += tone.to_s
       tone = 0
     end
+    pinyin.rstrip
   end
 end
