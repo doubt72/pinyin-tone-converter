@@ -16,6 +16,106 @@
 require_relative '../pinyin_tone_converter'
 
 describe 'pinyin_tone_converter tests' do
+  context 'basic tests' do
+    context 'numbered pinyin to utf-8' do
+      def self.basic_test(a, b)
+        it "#{a} should convert to #{b}" do
+          b.should == PinyinToneConverter.number_to_utf8( a )
+        end
+      end
+
+      # Empty string
+      basic_test("", "")
+      basic_test(" ", "")
+
+      # All four tones
+      basic_test("zhong1", "zhōng")
+      basic_test("zhong1 wen2", "zhōng wén")
+      basic_test("wang3 xing4", "wǎng xìng")
+      basic_test("zhong1 wen2 wang3 xing4", "zhōng wén wǎng xìng")
+
+      # Handling repositioning for 'i'
+      basic_test("liang1 bai2", "liāng bái")
+
+      # Handling repositioning for 'ü'
+      basic_test("lüe3 wün4", "lüě wǜn")
+
+      # Also Handling v
+      basic_test("lve3 wvn4", "lüě wǜn")
+
+      # Also Handling u:
+      basic_test("lu:e3 wu:n4", "lüě wǜn")
+
+      # Zero tone tests
+      basic_test("shuo1 le0", "shūo le")
+      basic_test("shuo0 shou3", "shuo shǒu")
+      basic_test("shuo", "shuo")
+      basic_test("shuo0", "shuo")
+
+      # Extra white space
+      basic_test("zhong1   wen2  ", "zhōng wén")
+
+      # No white space
+      basic_test("zhong1wen2", "zhōng wén")
+
+      # Other characters
+      basic_test("zhong1!@$%^&**wen2", "zhōng wén")
+
+      # Unexpected/bogus input
+      # We don't actually care so much what it does, so just sanity checking
+      basic_test("zhng1 2", "zhng")
+      basic_test("zhōng wén", "zh ng w n")
+      basic_test("123", "")
+      basic_test("1 2 3", "")
+    end
+
+    context 'utf-8 pinyin to numbered' do
+      def self.basic_test(a, b)
+        it "#{a} should convert to #{b}" do
+          b.should == PinyinToneConverter.utf8_to_number( a )
+        end
+      end
+
+      # Empty string
+      basic_test("", "")
+      basic_test(" ", "")
+
+      # All four tones
+      basic_test("zhōng", "zhong1")
+      basic_test("zhōng wén", "zhong1 wen2")
+      basic_test("wǎng xìng", "wang3 xing4")
+      basic_test("zhōng wén wǎng xìng", "zhong1 wen2 wang3 xing4")
+
+      # When tone is on "wrong" syllable
+      basic_test("lìang baì", "liang4 bai4")
+      basic_test("lǜe wǜn", "lve4 wvn4")
+      basic_test("shoū le", "shou1 le")
+
+      # Zero tone tests
+      basic_test("shūo le", "shuo1 le")
+      basic_test("shuo shǒu", "shuo shou3")
+      basic_test("shuo", "shuo")
+
+      # Extra white space
+      basic_test("zhōng   wén  ", "zhong1 wen2")
+
+      # Other characters
+      basic_test("zhōng!@$%^&**wén", "zhong1 wen2")
+
+      # Unexpected/bogus input
+      # We don't actually care so much what it does, so just sanity checking
+      basic_test("zhng1 2", "zhng")
+      basic_test("zh ng w n", "zh ng w n")
+      basic_test("zhong1 wen2", "zhong wen")
+      basic_test("123", "")
+      basic_test("1 2 3", "")
+      basic_test("shuo0", "shuo")
+      basic_test("zhōngwén", "zhongwen2")
+      basic_test("lìāng báì", "liang1 bai4")
+      basic_test("lǜě wǜn", "lve3 wvn4")
+    end
+  end
+
   context 'interating over all syllables' do
     def self.initials
       ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j',
@@ -76,6 +176,4 @@ describe 'pinyin_tone_converter tests' do
       end
     end
   end
-
-  # TODO: for single syllables, 0-syllables, v-syllables
 end
