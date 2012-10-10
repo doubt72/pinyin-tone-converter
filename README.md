@@ -1,6 +1,6 @@
 # Pinyin Tone Converter
 
-This repository contains a simple ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the UTF-8 equivalent pinyin using tone diacritical marks (like "zhōng wén") and back.
+Wherein I solve a problem nobody really has (^_^), this repository contains a simple ruby class (PinyinToneConverter) that converts pinyin numbered tones (i.e., something like "zhong1 wen2") to the UTF-8 equivalent pinyin using tone diacritical marks (like "zhōng wén") and back.
 
 ## Usage
 
@@ -34,9 +34,9 @@ This repository includes tests to make sure it works (because everybody likes we
 
         rspec
 
-Easy peasy.  Only 963 tests at last count -- obviously the test suite still needs some beefing up.
+Easy peasy.  Only 963 tests at last count -- obviously the test suite still needs some beefing up. ^_^
 
-(Obviously, the rspec is required to run the tests, so the rspec gem should be installed.)
+(Rspec is required to run the tests, so you'll need to install that.)
 
 ## License
 
